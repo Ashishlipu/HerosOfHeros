@@ -99,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public String sendMailForResetPassword(String email) {
 		Employee emp =  employeeRepo.findByEmail(email);
 		if(emp != null) {
-			mailService.sendMailForResetPassword(email,emp.getEmpname());
+			mailService.sendMailForResetPassword(email,emp.getEmpname(),emp.getDesignation());
 			return email;
 		}
 		throw new EmpNotFoundException("Employee", "Email", email) ;

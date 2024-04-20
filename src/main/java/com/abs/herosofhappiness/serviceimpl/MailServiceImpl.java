@@ -26,7 +26,7 @@ public class MailServiceImpl implements MailService {
 	
 	//for resetpassword link mail
 		@Override
-		public String sendMailForResetPassword(String email,String name) {
+		public String sendMailForResetPassword(String email,String name,String designation) {
 			MimeMessage message=mail.createMimeMessage();
 			String m1="Hello "+name+",\n"
 					+ "\r\n"
@@ -40,9 +40,9 @@ public class MailServiceImpl implements MailService {
 			
 			helper.setText(m1+"""
 					<div>
-	                    <a href="http://localhost:3000/resetPassword?email=%s" target="_blank">Click this link to reset password</a>
+	                    <a href="http://localhost:3000/resetPassword?email=%s&designation=%s" target="_blank">Click this link to reset password</a>
 	                </div>
-					""".formatted(email),true);
+					""".formatted(email,designation),true);
 			mail.send(message);
 			return email;
 			

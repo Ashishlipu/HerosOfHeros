@@ -27,7 +27,7 @@ public class AdminController {
 	AdminService adminService;
 	
 	@PostMapping("/createadmin")
-	public ResponseEntity<Object> createAdmin(@RequestBody Admin admin) {
+	public ResponseEntity<Object> createAdmin(@RequestBody Employee admin) {
 		try {
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.createAdmin(admin));		
 		}
@@ -38,17 +38,17 @@ public class AdminController {
 	
 	@PostMapping("/createemployee")
 	public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
+		try {
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.createEmployee(employee));
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("/getAdmin")
 	public ResponseEntity<Object> getAdmin(@RequestHeader String email){
 		return ResponseEntity.status(HttpStatus.FOUND).body(adminService.getAdminByEmail(email));
-	}
-	
-	@PostMapping("save")
-	public ResponseEntity<String> adminSave(@RequestBody Admin a){
-		return new ResponseEntity<String>(adminService.saveAdmin(a),HttpStatus.CREATED);
 	}
 	
 	
@@ -59,7 +59,7 @@ public class AdminController {
 	
 	
 	@GetMapping("resetpasswordmail")
-	public ResponseEntity<String> resetpasswordForMail(@RequestParam String email){
+	public ResponseEntity<String> resetpasswordForMail(@RequestHeader String email){
 		return new ResponseEntity<String>(adminService.sendMailForResetPassword(email),HttpStatus.OK);
 	}
 	

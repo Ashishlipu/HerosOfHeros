@@ -52,13 +52,7 @@ public class Employee {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate hiredate;
 		
-	@Column(name = "manager")
-	private boolean mgr;
-	
 	private String mgrname;
-	
-	@Column(name = "hr")
-	private boolean hr;
 	
 	@Column(name = "hr_id")
 	private int hid;
@@ -90,9 +84,7 @@ public class Employee {
 		this.salary=employeeCopy.getSalary();
 		this.gender=employeeCopy.getGender();
 		this.hiredate=employeeCopy.getHiredate();
-		this.mgr=employeeCopy.isMgr();
 		this.mgrname=employeeCopy.getMgrname();
-		this.hr=employeeCopy.isHr();
 		this.hid=employeeCopy.getHid();
 		this.mid=employeeCopy.getMid();
 		this.address=employeeCopy.getAddress();

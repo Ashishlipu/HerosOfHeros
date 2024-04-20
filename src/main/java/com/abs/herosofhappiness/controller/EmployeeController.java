@@ -52,6 +52,8 @@ public class EmployeeController {
 	
 	@PutMapping("/resetpassword")
 	public ResponseEntity<String> resetpassword(@RequestHeader String email,@RequestHeader String password){
+		System.out.println(email);
+		System.out.println(password);
 		return new ResponseEntity<String>(employeeService.resetPassword(email,password),HttpStatus.OK);
 	}
 	

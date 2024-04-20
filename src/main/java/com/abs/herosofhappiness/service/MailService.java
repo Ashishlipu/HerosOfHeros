@@ -8,7 +8,7 @@ public interface MailService {
 
 	public String sendResignMailToHr(Employee employee);
 	
-	public String sendMailForResetPassword(String email,String mgrname);
+	public String sendMailForResetPassword(String email,String mgrname,String designatio);
 	
 	public String approveLeaveMail(String email,String name);
 	

@@ -62,7 +62,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public String sendMailForResetPassword(String email) {
 		Employee mgr =  managerRepo.findByEmail(email);
 		if(mgr != null) {
-			mailService.sendMailForResetPassword(email,mgr.getEmpname());
+			mailService.sendMailForResetPassword(email,mgr.getEmpname(),mgr.getDesignation());
 			return email;
 		}
 		throw new ManagerNotFoundException("Manager", "Email", email) ;

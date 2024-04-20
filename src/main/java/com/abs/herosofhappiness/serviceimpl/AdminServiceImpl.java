@@ -36,8 +36,8 @@ public class AdminServiceImpl implements AdminService {
     BCryptPasswordEncoder b=new BCryptPasswordEncoder();
 	
 	@Override
-	public Admin createAdmin(Admin admin) {
-		Admin admin1=adminRepo.save(admin);
+	public Employee createAdmin(Employee admin) {
+		Employee admin1=employeeRepo.save(admin);
 		return admin1;
 	}
 
@@ -80,14 +80,14 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public int loginAdmin(String email, String password) {
-		Admin ad =  adminRepo.findByEmail(email);
-		if(ad != null) {
+		Employee admin = employeeRepo.findByEmail(email);
+		if(admin != null) {
 //			if(b.matches(password, ad.getPassword())) {
-			if(password.equals(ad.getPassword())) {
+			if(password.equals(admin.getPassword())) {
 				int otp =(int)(Math.random()*1000000);
 				System.out.println(otp);
 				SimpleMailMessage ms =  new SimpleMailMessage();
-				ms.setTo(ad.getEmail());
+				ms.setTo(admin.getEmail());
 				ms.setFrom("projectjspider@gmail.com");
 				ms.setSubject("OTP for login");
 				ms.setText("Hello,\r\n"
@@ -105,19 +105,12 @@ public class AdminServiceImpl implements AdminService {
 		throw new AdminNotFoundExcption("Admin", "email", email);
 	}
 
-	@Override
-	public String saveAdmin(Admin a) {
-		String pswd = b.encode(a.getPassword());
-		a.setPassword(pswd);
-		adminRepo.save(a);
-		return "save";
-	}
 
 	@Override
 	public String sendMailForResetPassword(String email) {
-		Admin admin =  adminRepo.findByEmail(email);
+		Employee admin =  employeeRepo.findByEmail(email);
 		if(admin != null) {
-			mailService.sendMailForResetPassword(email,admin.getName());
+			mailService.sendMailForResetPassword(email,admin.getEmpname(),admin.getDesignation());
 			return email;
 		}
 		throw new AdminNotFoundExcption("Admin", "email", email);
@@ -127,19 +120,19 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String resetpassword(String email,String password) {
 		
-		Admin admin =  adminRepo.findByEmail(email);
+		Employee admin =  employeeRepo.findByEmail(email);
 		if(admin != null) {
 			String pswd =  b.encode(password);
 			admin.setPassword(pswd);
-			adminRepo.save(admin);
+			employeeRepo.save(admin);
 			return "reset password successfully";
 		}
 		return null;
 	}
 
 	@Override
-	public Admin getAdminByEmail(String email) {
-		Admin admin=adminRepo.findByEmail(email);
+	public Employee getAdminByEmail(String email) {
+		Employee admin=employeeRepo.findByEmail(email);
 		if(admin!=null) {
 			return admin;
 		}

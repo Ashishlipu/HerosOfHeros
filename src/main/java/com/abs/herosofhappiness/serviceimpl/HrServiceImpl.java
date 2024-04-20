@@ -63,7 +63,7 @@ public class HrServiceImpl implements HrService {
 	public String sendMailForResetPassword(String email) {
 		Employee hr =  hrRepo.findByEmail(email);
 		if(hr != null) {
-			mailService.sendMailForResetPassword(email,hr.getEmpname());
+			mailService.sendMailForResetPassword(email,hr.getEmpname(),hr.getDesignation());
 			return email;
 		}
 		throw new ManagerNotFoundException("Hr", "Email", email) ;

@@ -32,13 +32,9 @@ public class EmployeeCopy {
 	private String gender;
 	
 	private LocalDate hiredate;
-		
-	private boolean mgr;
-	
+			
 	private String mgrname;
-	
-	private boolean hr;
-	
+		
 	private int hid;
 		
 	private int mid;	
