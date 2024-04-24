@@ -9,10 +9,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.abs.herosofhappiness.entity.Admin;
+import com.abs.herosofhappiness.entity.Client;
 import com.abs.herosofhappiness.entity.Employee;
 import com.abs.herosofhappiness.exception.AdminNotFoundExcption;
 import com.abs.herosofhappiness.exception.EmpNotFoundException;
 import com.abs.herosofhappiness.repo.AdminRepo;
+import com.abs.herosofhappiness.repo.ClientRepo;
 import com.abs.herosofhappiness.repo.EmployeeRepo;
 import com.abs.herosofhappiness.service.AdminService;
 import com.abs.herosofhappiness.service.MailService;
@@ -26,6 +28,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	EmployeeRepo employeeRepo;
+	
+	
 	
 	@Autowired(required = true)
 	JavaMailSender javaMailSender;
@@ -46,7 +50,7 @@ public class AdminServiceImpl implements AdminService {
 		 String password="Abs";
 		 int otp=(int)(Math.random()*100000);
 		 password=password+otp;
-		 employee.setPassword(password);
+		 employee.setPassword(b.encode(password));
 		 Employee dbEmployee=employeeRepo.save(employee);
 		 
 		 SimpleMailMessage message=new SimpleMailMessage();
@@ -61,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
 		 		+ "Below are your login credentials for accessing our company systems:\r\n"
 		 		+ "\r\n"
 		 		+ "Username : "+employee.getEmail() +"\r\n"
-		 		+ "Temporary Password : "+employee.getPassword()+"\r\n"
+		 		+ "Temporary Password : "+password+"\r\n"
 		 		+ "Access Link : [Link to Access Company Systems]"
 		 		+ "\r\n"
 		 		+"\r\n"
@@ -158,6 +162,8 @@ public class AdminServiceImpl implements AdminService {
 		}
 		throw new EmpNotFoundException("Employee", "Email", email);
 	}
+
+	
 
 
 }

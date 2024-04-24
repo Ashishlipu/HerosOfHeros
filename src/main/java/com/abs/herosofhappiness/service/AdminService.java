@@ -4,6 +4,7 @@ package com.abs.herosofhappiness.service;
 import java.util.List;
 
 import com.abs.herosofhappiness.entity.Admin;
+import com.abs.herosofhappiness.entity.Client;
 import com.abs.herosofhappiness.entity.Employee;
 
 
@@ -21,4 +22,6 @@ public interface AdminService {
 	public List<Employee> getAllEmployees();
 
 	public String disableEmployee(String email);
+	
+	
 }
