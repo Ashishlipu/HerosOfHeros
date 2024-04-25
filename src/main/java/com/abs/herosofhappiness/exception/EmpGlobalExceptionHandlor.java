@@ -28,4 +28,9 @@ public class EmpGlobalExceptionHandlor extends ResponseEntityExceptionHandler {
 	ResponseEntity hrNotFound(HrNotFoundException h) {
 	return new ResponseEntity<>(h.getMsg(),HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler
+	ResponseEntity clientNotFoundException(ClientNotFoundException c) {
+		return new ResponseEntity(c.getMsg(),HttpStatus.NOT_FOUND);
+	}
 }

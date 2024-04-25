@@ -12,6 +12,7 @@ import com.abs.herosofhappiness.entity.Admin;
 import com.abs.herosofhappiness.entity.Client;
 import com.abs.herosofhappiness.entity.Employee;
 import com.abs.herosofhappiness.exception.AdminNotFoundExcption;
+import com.abs.herosofhappiness.exception.ClientNotFoundException;
 import com.abs.herosofhappiness.exception.EmpNotFoundException;
 import com.abs.herosofhappiness.repo.AdminRepo;
 import com.abs.herosofhappiness.repo.ClientRepo;
@@ -29,7 +30,8 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	EmployeeRepo employeeRepo;
 	
-	
+	@Autowired
+	ClientRepo clientRepo;
 	
 	@Autowired(required = true)
 	JavaMailSender javaMailSender;
@@ -161,6 +163,20 @@ public class AdminServiceImpl implements AdminService {
 			return mailService.sendResignMailToHr(employee);
 		}
 		throw new EmpNotFoundException("Employee", "Email", email);
+	}
+	
+	@Override
+	public Client saveClient(Client client) {
+		return clientRepo.save(client);
+	}
+
+	@Override
+	public List<Client> getAllClients() {
+		List<Client> clientlist=clientRepo.findAll();
+		if(clientlist!=null) {
+			return clientlist;
+		}
+		throw new ClientNotFoundException("No client is present");
 	}
 
 	

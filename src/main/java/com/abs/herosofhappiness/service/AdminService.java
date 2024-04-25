@@ -23,5 +23,7 @@ public interface AdminService {
 
 	public String disableEmployee(String email);
 	
+	public Client saveClient(Client client);
 	
+	public List<Client> getAllClients();
 }

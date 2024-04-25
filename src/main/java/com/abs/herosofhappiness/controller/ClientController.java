@@ -19,11 +19,11 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @CrossOrigin("http://localhost:3000")
 public class ClientController {
 	
-	@Autowired
-	ClientService clientService;
-
-	@PostMapping("saveClient")
-	public ResponseEntity<String> resetpassword(@RequestBody Client c ){
-		return new ResponseEntity<String>(clientService.saveClient(c),HttpStatus.OK);
-	}
+//	@Autowired
+//	ClientService clientService;
+//
+//	@PostMapping("saveClient")
+//	public ResponseEntity<String> resetpassword(@RequestBody Client c ){
+//		return new ResponseEntity<String>(clientService.saveClient(c),HttpStatus.OK);
+//	}
 }

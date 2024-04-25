@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abs.herosofhappiness.entity.Admin;
+import com.abs.herosofhappiness.entity.Client;
 import com.abs.herosofhappiness.entity.Employee;
 import com.abs.herosofhappiness.service.AdminService;
 
@@ -78,5 +79,20 @@ public class AdminController {
 	@GetMapping("/inactiveEmployee")
 	public ResponseEntity<String> disableEmployee(@RequestHeader String email) {
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.disableEmployee(email));
+	}
+	
+	@PostMapping("/saveClient")
+	public ResponseEntity<Object> saveClient(@RequestBody Client client) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.saveClient(client));
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/getAllClients")
+	public ResponseEntity<List<Client>> getAllCLients() {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.getAllClients());
 	}
 }
