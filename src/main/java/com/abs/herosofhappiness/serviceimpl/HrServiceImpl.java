@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.abs.herosofhappiness.entity.Employee;
 import com.abs.herosofhappiness.exception.EmpNotFoundException;
+import com.abs.herosofhappiness.exception.HrNotFoundException;
 import com.abs.herosofhappiness.exception.ManagerNotFoundException;
 import com.abs.herosofhappiness.repo.EmployeeRepo;
 import com.abs.herosofhappiness.repo.HrRepo;
@@ -56,7 +57,7 @@ public class HrServiceImpl implements HrService {
 				return otp;
 			}
 		}
-		throw new ManagerNotFoundException("Hr", "Email", email);
+		throw new HrNotFoundException("Hr", "Email", email);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class HrServiceImpl implements HrService {
 			mailService.sendMailForResetPassword(email,hr.getEmpname(),hr.getDesignation());
 			return email;
 		}
-		throw new ManagerNotFoundException("Hr", "Email", email) ;
+		throw new HrNotFoundException("Hr", "Email", email) ;
 	}
 
 

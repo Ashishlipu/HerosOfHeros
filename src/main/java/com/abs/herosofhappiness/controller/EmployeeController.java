@@ -30,7 +30,7 @@ public class EmployeeController {
 	
 	@GetMapping("/getEmployee")
 	public ResponseEntity<Object> getEmployee(@RequestHeader String email) {
-			return ResponseEntity.status(HttpStatus.FOUND)
+			return ResponseEntity.status(HttpStatus.OK)
 					.body(employeeService.getEmployee(email));
 	}
 	
@@ -42,7 +42,7 @@ public class EmployeeController {
 	
 	@GetMapping("/login")
 	public ResponseEntity<Object> empLogin(@RequestHeader String email,@RequestHeader String password){
-		return new ResponseEntity<Object>(employeeService.loginEmp(email, password),HttpStatus.FOUND);
+		return new ResponseEntity<Object>(employeeService.loginEmp(email, password),HttpStatus.OK);
 	}
 	
 	
@@ -67,8 +67,18 @@ public class EmployeeController {
 	
 	@PostMapping("/createAccount")
 	public ResponseEntity<Object> name(@RequestBody AccountDetails account,@RequestHeader String email) {
-		return ResponseEntity.status(HttpStatus.CREATED)
+		return ResponseEntity.status(HttpStatus.OK)
 				.body(employeeService.createAccount(account,email));
+	}
+	
+	@GetMapping("/leave")
+	public ResponseEntity<Object> leave(@RequestHeader String email) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(employeeService.leave(email));
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 	
 	@PostMapping("/applyLeave")

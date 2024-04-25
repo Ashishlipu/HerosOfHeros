@@ -37,12 +37,13 @@ public class MailServiceImpl implements MailService {
 				helper.setTo(email);
 			
 			helper.setSubject("Password reset link !!");
+			helper.setText(m1);
 			
-			helper.setText(m1+"""
-					<div>
-	                    <a href="http://localhost:3000/resetPassword?email=%s&designation=%s" target="_blank">Click this link to reset password</a>
-	                </div>
-					""".formatted(email,designation),true);
+//			helper.setText(m1+"""
+//					<div>
+//	                    <a href="http://localhost:3000/resetPassword?email=%s&designation=%s" target="_blank">Click this link to reset password</a>
+//	                </div>
+//					""".formatted(email,designation),true);
 			mail.send(message);
 			return email;
 			

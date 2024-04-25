@@ -43,6 +43,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired
 	EmpLeaveRepo empLeaveRepo;
 	
+	@Autowired
+	EmpLeaveRepo leave;
+	
 	BCryptPasswordEncoder b=new BCryptPasswordEncoder();
 	
 	public Employee getEmployee(String email) {
@@ -222,6 +225,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 			return "Resignation applied successfully";
 		}
 		return null;
+	}
+
+	@Override
+	public Object leave(String email) {
+		int empid=employeeRepo.findByEmail(email).getEmpid();
+		EmpLeave empleave=leave.findByEmpId(empid);
+		if(empleave!=null) {
+			return empleave;
+		}
+		return null;
+		
 	}
 
 }

@@ -26,7 +26,7 @@ public class ManagerController {
 	
 	@GetMapping("login")
 	public ResponseEntity<Object> managerLogin(@RequestHeader String email,@RequestHeader String password){
-		return new ResponseEntity<Object>(managerService.loginManager(email, password),HttpStatus.FOUND);
+		return new ResponseEntity<Object>(managerService.loginManager(email, password),HttpStatus.OK);
 	}
 	
 	
@@ -43,7 +43,7 @@ public class ManagerController {
 	
 	
 	@GetMapping("getemployeebymgr")
-	public ResponseEntity<List<Employee>> findEmpByHr_id(@RequestHeader String email){
-		return new ResponseEntity<List<Employee>>(managerService.findEmpByMgrId(email),HttpStatus.FOUND);
+	public ResponseEntity<List<Employee>> findEmpByMgr_id(@RequestHeader String email){
+		return new ResponseEntity<List<Employee>>(managerService.findEmpByMgrId(email),HttpStatus.OK);
 	}
 }

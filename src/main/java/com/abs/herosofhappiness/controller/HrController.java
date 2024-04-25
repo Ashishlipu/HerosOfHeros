@@ -26,7 +26,7 @@ public class HrController {
 
 	@GetMapping("login")
 	public ResponseEntity<Object> hrLogin(@RequestHeader String email,@RequestHeader String password){
-		return new ResponseEntity<Object>(hrService.loginHr(email, password),HttpStatus.FOUND);
+		return new ResponseEntity<Object>(hrService.loginHr(email, password),HttpStatus.OK);
 	}
 	
 	
@@ -43,6 +43,6 @@ public class HrController {
 
 	@GetMapping("getemployeebyhr")
 	public ResponseEntity<List<Employee>> findEmpByHr_id(@RequestHeader String email){
-		return new ResponseEntity<List<Employee>>(hrService.findEmpByHrId(email),HttpStatus.FOUND);
+		return new ResponseEntity<List<Employee>>(hrService.findEmpByHrId(email),HttpStatus.OK);
 	}
 }

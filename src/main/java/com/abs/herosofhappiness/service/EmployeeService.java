@@ -19,5 +19,6 @@ public interface EmployeeService {
 	public String applyResignation(String email);
 	public String rejectLeave(String email);
 	public String approveLeave(String email);
+	public Object leave(String email);
 	
 }
